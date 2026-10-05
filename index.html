@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aula · Tarefa em Paz</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F7A5A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aula">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Nunito:wght@400;700;800&display=swap">
+<style>
+:root{--bg:#F3F6F4;--card:#fff;--fg:#1D2A24;--muted:#56665E;--line:#D7E0DA;--accent:#1F7A5A;--accent-fg:#fff;--soft:#E3F1EA;--no:#B3261E}
+@media (prefers-color-scheme:dark){:root{--bg:#111814;--card:#18221D;--fg:#E6EFEA;--muted:#9DB0A6;--line:#2A3831;--accent:#4CC196;--accent-fg:#0D1A14;--soft:#1E3129;--no:#FF9A92;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.5 "Nunito",system-ui,sans-serif}
+.w{max-width:620px;margin:0 auto;padding:28px 16px 48px;display:flex;flex-direction:column;gap:16px}
+h1{font:800 32px/1.1 "Baloo 2",system-ui;margin:0}
+.c{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px}
+textarea{width:100%;min-height:140px;border:2px dashed var(--accent);border-radius:14px;padding:12px;background:var(--bg);color:var(--fg);font:14px/1.4 ui-monospace,Consolas,monospace}
+button{min-height:60px;border-radius:16px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-fg);font-family:inherit;font-weight:800;font-size:20px;cursor:pointer}
+button.g{background:transparent;color:var(--accent);font-size:17px;min-height:50px}
+.m{color:var(--muted);font-size:15px;margin:0}.e{color:var(--no);font-weight:800;margin:0}
+ol{margin:0;padding-left:22px}
+</style>
+</head>
+<body>
+<div class="w" id="tela">
+  <h1>Aula de hoje</h1>
+  <div class="c">
+    <ol>
+      <li>No ChatGPT, toque em <b>copiar</b> na caixinha do <b>Código da aula</b>.</li>
+      <li>Volte aqui e toque no botão verde.</li>
+    </ol>
+    <button id="colar">📋 Colar e abrir</button>
+    <p class="e" id="err" role="alert"></p>
+    <div id="manual" hidden>
+      <p class="m">O navegador não deixou colar sozinho. Toque e segure no quadro abaixo → <b>Colar</b> (ou Ctrl+V). A aula abre sozinha.</p>
+      <textarea id="cod" placeholder="Cole aqui o código da aula…" aria-label="Código da aula"></textarea>
+    </div>
+  </div>
+  <button class="g" id="ultima" hidden>↺ Reabrir a última aula</button>
+  <p class="m">Tudo fica no seu aparelho: nada da aula é enviado para a internet.</p>
+  <p class="m">Dica: coloque esta página na tela inicial (Compartilhar → "Adicionar à Tela de Início" no iPhone; menu ⋮ → "Adicionar à tela inicial" no Android).</p>
+</div>
+<script src="motor.js"></script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function ler(txt){
+    var t=String(txt||'').replace(/```(json)?/gi,'');
+    var a=t.indexOf('{'), b=t.lastIndexOf('}');
+    if(a<0||b<=a) throw new Error('sem código');
+    var j=t.slice(a,b+1);
+    try{ return JSON.parse(j); }
+    catch(e){ return JSON.parse(j.replace(/[“”]/g,'"').replace(/,\s*([}\]])/g,'$1')); }
+  }
+  function abrir(txt){
+    var A;
+    try{ A=ler(txt); }catch(e){ $('err').textContent='O que foi colado não é um Código da aula. Volte ao ChatGPT e toque em copiar na caixinha "Código da aula".'; return false; }
+    if(!A.explicacao&&!A.treino){ $('err').textContent='O código veio incompleto. No ChatGPT, peça: "refaça o código da aula".'; return false; }
+    try{ localStorage.setItem('tep-ultima', JSON.stringify(A)); }catch(e){}
+    TarefaEmPaz.aula(A); return true;
+  }
+  function manual(){ $('manual').hidden=false; $('cod').focus(); }
+  $('colar').onclick=function(){
+    $('err').textContent='';
+    try{
+      if(navigator.clipboard && navigator.clipboard.readText){
+        navigator.clipboard.readText().then(function(t){ if(!abrir(t)) manual(); }, manual);
+      } else manual();
+    }catch(e){ manual(); }
+  };
+  $('cod').addEventListener('input',function(){ if(this.value.length>50) abrir(this.value); });
+  try{ if(localStorage.getItem('tep-ultima')){ $('ultima').hidden=false; $('ultima').onclick=function(){ abrir(localStorage.getItem('tep-ultima')); }; } }catch(e){}
+})();
+</script>
+</body>
+</html>
