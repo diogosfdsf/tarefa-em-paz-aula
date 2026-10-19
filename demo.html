@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>A receita do Capitão Tito</title></head><body>
+<script src="motor.js"></script>
+<script>
+TarefaEmPaz.aula({
+  titulo: "A receita do Capitão Tito", materia: "Língua Portuguesa", data: "05/10/2026",
+  adulto: "papai", personagem: "Capitão Tito",
+  gancho: { emoji: "🍖", titulo: "O caderno sumiu!", texto: [
+    "No barco pirata, o vento levou o caderno de receitas da cozinheira Lila.",
+    "O Capitão Tito está com fome e quer quibe, mas ele só faz **exatamente** o que está escrito.",
+    "A tripulação precisa escrever uma receita clara. Bora?" ] },
+  explicacao: [
+    { titulo: "Por que isso existe?", texto: ["Se a receita estiver bagunçada, o Capitão Tito come a carne crua!", "**Texto instrucional** ensina a fazer algo, passo a passo: receitas, regras de jogo, manuais."], visual: { tipo: "emoji", texto: "📜➡️🍽️" } },
+    { titulo: "As 3 partes da receita", texto: ["Pense num mapa do tesouro: cada passo é uma ilha, na ordem certa."], visual: { tipo: "caixas", itens: [
+      { titulo: "Título", texto: "o nome do prato" }, { titulo: "Lista", texto: "ingredientes e utensílios" }, { titulo: "Modo de preparo", texto: "passos 1, 2, 3" } ] } },
+    { titulo: "A regra, passo a passo", texto: [], visual: { tipo: "passos", itens: ["Passos **numerados**, na ordem em que acontecem.", "Cada passo começa com um ==verbo que manda fazer==: misture, corte, asse.", "Diga a **quantidade**: 2 xícaras, 1 colher."] } },
+    { tipo: "checagem", pergunta: "Qual frase é um passo de receita?", opcoes: ["Lila picou a cebola ontem.", "Pique a cebola bem miudinho.", "A cebola é roxa."], correta: 1,
+      porque: "\"Pique\" manda fazer. Passo de receita começa com verbo de ação.", outro_exemplo: "\"Lave as mãos.\" manda fazer. \"Capitão Tito lavou as mãos.\" só conta o que aconteceu." },
+    { titulo: "Pensando alto", texto: ["**Exemplo 1.** \"A carne é misturada.\" Isso manda alguém fazer? Não, só descreve. Então troco: \"Misture a carne.\"", "**Exemplo 2.** Não dá para passar manteiga no pão que eu ainda não peguei. Então: 1. Pegue o pão. 2. Passe manteiga."] },
+    { titulo: "Quase iguais, respostas diferentes", texto: [], visual: { tipo: "contraste", pares: [
+      { a: "**Misture** a farinha.", b: "Lila **misturou** a farinha.", muda: "o primeiro manda fazer; o segundo só conta." },
+      { a: "Coloque **1 colher** de sal.", b: "Coloque sal.", muda: "sem medida, o Capitão Tito põe o saleiro inteiro!" } ] } },
+    { tipo: "checagem", pergunta: "Qual está na ordem certa para fazer suco?", opcoes: ["Beba. Coloque no copo. Esprema.", "Esprema a laranja. Coloque no copo. Beba."], correta: "B",
+      porque: "Primeiro faço o suco, depois ponho no copo, por fim bebo.", outro_exemplo: "No sanduíche, \"pegue o pão\" vem antes de \"passe manteiga\"." },
+    { titulo: "A armadilha da pressa", texto: ["Quem faz rápido demais pula um passo."], visual: { tipo: "errado_certo", errado: "Carne e cebola. Forno. Pronto.", certo: "1. Corte a cebola. 2. Misture com a carne. 3. Asse por 30 minutos." } },
+    { titulo: "Regra de bolso", texto: [], visual: { tipo: "destaque", texto: "Receita boa: passos na ordem e verbo de ação no começo!" } }
+  ],
+  treino: [
+    { pergunta: "Qual palavra começa bem um passo?", opcoes: ["Misture", "Misturado", "Misturou"], correta: 0, dica: "Fale como a cozinheira Lila na cozinha: faça isso!", porque: "\"Misture\" manda fazer." },
+    { pergunta: "Qual vem PRIMEIRO no suco de laranja?", opcoes: ["Esprema as laranjas", "Lave as laranjas", "Sirva no copo"], correta: 1, dica: "Antes de usar uma fruta, o que fazemos com ela?", porque: "Lavar vem antes de espremer." },
+    { pergunta: "Qual passo tem medida clara?", opcoes: ["Adicione farinha.", "Adicione 2 xícaras de farinha."], correta: "Adicione 2 xícaras de farinha.", dica: "Procure o número.", porque: "\"2 xícaras\" é a quantidade." }
+  ],
+  desafio: [
+    { pergunta: "Qual texto é instrucional?", opcoes: ["Ontem, Bia desenhou o mapa.", "Desenhe o mapa com lápis.", "O mapa é grande."], correta: 1, porque: "\"Desenhe\" manda fazer." },
+    { tipo: "classificar", pergunta: "Toque na coluna certa:", colunas: ["Ingrediente", "Utensílio"], itens: [
+      { texto: "Cebola", coluna: 0 }, { texto: "Tigela", coluna: 1 }, { texto: "Hortelã", coluna: 0 }, { texto: "Colher", coluna: 1 } ],
+      porque: "Ingrediente vai na comida; utensílio a gente usa para cozinhar." },
+    { pergunta: "Qual frase NÃO manda fazer nada?", opcoes: ["Corte a carne.", "A carne foi cortada pela cozinheira Lila.", "Misture bem."], correta: 1, porque: "Ela só conta o que aconteceu." }
+  ],
+  explique: { pergunta: "Como você explicaria para o Capitão Tito o que é um texto instrucional?", palavras: ["passos", "ordem", "verbo de ação"] },
+  fechamento: { titulo: "O Capitão Tito comeu o quibe!", mensagem: "Você prestou atenção na ordem e nos verbos. Isso é estratégia de capitão!" }
+});
+</script>
+</body></html>
